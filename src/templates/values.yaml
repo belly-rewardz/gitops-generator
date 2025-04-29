@@ -1,6 +1,0 @@
-# values.yaml
-config:
-  namespace: {namespace}
-
-microservice:
-  image: "{service-name}:latest"

@@ -4,13 +4,7 @@ const yaml = require('js-yaml');
 const { generateDependencyConfig } = require('./dependencies');
 
 function generateValues(params, outputDir) {
-  // Read base template
-  const baseTemplate = fs.readFileSync(
-    path.join(__dirname, '..', 'templates', 'values.yaml'),
-    'utf-8'
-  );
-
-  // Read environment specific config from provided path or fallback to default
+  // Read environment specific config
   const envConfigPath = params.configPath || path.join(process.cwd(), `${params.environment}.yaml`);
   if (!fs.existsSync(envConfigPath)) {
     throw new Error(`Environment config file not found: ${envConfigPath}`);
@@ -34,8 +28,10 @@ function generateValues(params, outputDir) {
     values = { ...values, ...yaml.load(depConfig) };
   }
 
-  const filePath = path.join(outputDir, params.type === 'dynamic' ? 'values.yaml' : 'values.yaml');
-  fs.writeFileSync(filePath, yaml.dump(values, { lineWidth: -1 }));
+  fs.writeFileSync(
+    path.join(outputDir, 'values.yaml'), 
+    yaml.dump(values, { lineWidth: -1 })
+  );
 }
 
 module.exports = { generateValues };

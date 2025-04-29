@@ -1,17 +1,29 @@
 const fs = require('fs');
 const path = require('path');
+const yaml = require('js-yaml');
 
 function generateDefaults(params, outputDir) {
-  const template = fs.readFileSync(
-    path.join(__dirname, '..', 'templates', 'values.default.yaml'),
-    'utf-8'
+  const defaultValues = {
+    config: {
+      namespace: params.namespace
+    },
+    microservice: {
+      servicePort: 80,
+      ingress: {
+        annotations: {
+          'kubernetes.io/ingress.class': 'nginx-private',
+          'nginx.ingress.kubernetes.io/proxy-body-size': '50m',
+          'nginx.ingress.kubernetes.io/use-regex': 'true',
+          'nginx.ingress.kubernetes.io/rewrite-target': '/$1'
+        }
+      }
+    }
+  };
+
+  fs.writeFileSync(
+    path.join(outputDir, 'values.default.yaml'),
+    yaml.dump(defaultValues, { lineWidth: -1 })
   );
-
-  const defaults = template
-    .replace(/{namespace}/g, params.namespace)
-    .replace(/{service-name}/g, params.serviceName);
-
-  fs.writeFileSync(path.join(outputDir, 'values.default.yaml'), defaults);
 }
 
 module.exports = { generateDefaults };
