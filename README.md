@@ -1,12 +1,12 @@
-# Helm Chart Generator
+# GitOps Generator
 
 ## Overview
 
-The Helm Chart Generator is a Node.js application designed to dynamically generate Helm chart files for microservices based on user-defined parameters. It automatically configures dependencies and generates appropriate configurations based on the service type.
+The GitOps Generator is a Node.js application designed to dynamically generate Helm chart files for microservices based on user-defined parameters. It automatically configures dependencies and generates appropriate configurations based on the service type.
 
 ## Features
 
-- Generates Helm chart files based on input parameters
+- Dynamically generates Helm chart files for microservices deployment with GitOps approach
 - Supports both static and dynamic deployment configurations
 - Automatic dependency management for supported services
 - Templated configurations for PostgreSQL and Redis
@@ -14,17 +14,17 @@ The Helm Chart Generator is a Node.js application designed to dynamically genera
 
 ## Supported Services
 
-| Service | Dependencies |
-|---------|-------------|
-| cerra-gen-ai | PostgreSQL, Redis |
-| auto-approver | PostgreSQL |
-| landing-page | Basic microservice |
-| frontend-app | Basic microservice |
+| Service         | Dependencies         |
+|-----------------|----------------------|
+| cerra-gen-ai    | PostgreSQL, Redis    |
+| auto-approver   | PostgreSQL           |
+| landing-page    | Basic microservice   |
+| frontend-app    | Basic microservice   |
 
 ## Project Structure
 
 ```
-helm-chart-generator
+gitops-generator
 ├── src
 │   ├── generators
 │   │   ├── chart.js
