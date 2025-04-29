@@ -34,7 +34,7 @@ function generateValues(params, outputDir) {
     values = { ...values, ...yaml.load(depConfig) };
   }
 
-  const filePath = path.join(outputDir, params.type === 'dynamic' ? 'values.yaml' : `values.yaml`);
+  const filePath = path.join(outputDir, params.type === 'dynamic' ? 'values.yaml' : 'values.yaml');
   fs.writeFileSync(filePath, yaml.dump(values, { lineWidth: -1 }));
 }
 
