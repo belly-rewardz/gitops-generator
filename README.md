@@ -2,7 +2,22 @@
 
 ## Overview
 
-The GitOps Generator is a Node.js application designed to dynamically generate Helm chart files for microservices based on user-defined parameters. It automatically configures dependencies and generates appropriate configurations based on the service type.
+The GitOps Generator is a Node.js application designed to generate Kubernetes deployment configurations for the rewardz-microservices repository. It automates the creation of Helm chart files that define infrastructure as code, which are then used by ArgoCD to manage deployments.
+
+## GitOps Workflow
+
+1. GitOps Generator creates/updates Kubernetes configuration in rewardz-microservices repository
+2. Changes are committed and pushed to rewardz-microservices
+3. ArgoCD detects changes and automatically syncs the cluster state
+4. Kubernetes deploys/updates the services based on the new configuration
+
+```mermaid
+graph LR
+    A[GitOps Generator] -->|Generates configs| B[rewardz-microservices repo]
+    B -->|Git push| C[Git]
+    C -->|Detects changes| D[ArgoCD]
+    D -->|Syncs| E[Kubernetes Cluster]
+```
 
 ## Features
 
@@ -11,6 +26,22 @@ The GitOps Generator is a Node.js application designed to dynamically generate H
 - Automatic dependency management for supported services
 - Templated configurations for PostgreSQL and Redis
 - Customizable deployment paths
+
+## Deployment Types
+
+### Static Deployments
+- Used for permanent environments like dev and prod
+- Configurations persist in the repository
+- Located in `apps/<service-name>/<environment>/`
+- Managed long-term by ArgoCD
+- Examples: production, staging, development environments
+
+### Dynamic Deployments
+- Used for temporary feature branch deployments
+- Located in `temporary/<namespace>/<service-name>/`
+- Automatically cleaned up after 24-48 hours
+- Perfect for testing feature branches
+- Examples: feature testing, PR reviews, temporary deployments
 
 ## Supported Services
 
