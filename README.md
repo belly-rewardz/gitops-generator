@@ -25,18 +25,22 @@ The GitOps Generator is a Node.js application designed to dynamically generate H
 
 ```
 gitops-generator
-├── src
-│   ├── generators
+├── src/
+│   ├── generators/
+│   │   ├── __tests__/         # Test files
 │   │   ├── chart.js
 │   │   ├── values.js
 │   │   ├── defaults.js
 │   │   └── dependencies.js
-│   ├── templates
+│   ├── templates/
 │   │   ├── chart.yaml
 │   │   ├── values.yaml
 │   │   └── values.default.yaml
 │   ├── constants.js
 │   └── app.js
+├── .eslintrc.js              # ESLint configuration
+├── .gitignore                # Git ignore rules
+├── jest.config.js            # Jest configuration
 ├── package.json
 └── README.md
 ```
@@ -100,6 +104,58 @@ node src/app.js \
   --type dynamic \
   --output-path /path/to/gitops/repo
 ```
+
+## Development
+
+### Setup
+
+```bash
+# Install dependencies
+npm install
+
+# Run linting
+npm run lint
+
+# Fix linting issues automatically
+npm run lint:fix
+
+# Run tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage report
+npm run test:coverage
+```
+
+### Linting
+
+The project uses ESLint with recommended rules and additional customizations:
+- Enforces semicolons
+- Requires single quotes
+- Warns about console usage
+- Warns about unused variables
+
+### Testing
+
+Tests are written using Jest and can be found in `__tests__` directories. The test suite includes:
+- Unit tests for core functionality
+- Coverage reporting
+- Watch mode for development
+
+Current test coverage:
+- Statements: 100%
+- Branches: 50%
+- Functions: 100%
+- Lines: 100%
+
+## Contributing
+
+1. Ensure all tests pass: `npm test`
+2. Ensure code follows linting rules: `npm run lint`
+3. Add tests for any new functionality
+4. Update documentation as needed
 
 ## License
 
