@@ -129,6 +129,16 @@ npm run test:watch
 npm run test:coverage
 ```
 
+### Pre-commit Hooks
+
+The project uses Husky and lint-staged to run checks before each commit:
+- Automatically runs ESLint on staged files
+- Runs related tests for changed files
+- Prevents commit if either linting or tests fail
+- Auto-fixes formatting issues when possible
+
+The pre-commit hook will only check files that are staged for commit, making the process faster than checking the entire codebase.
+
 ### Linting
 
 The project uses ESLint with recommended rules and additional customizations:
