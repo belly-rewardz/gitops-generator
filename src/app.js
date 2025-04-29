@@ -78,4 +78,12 @@ async function main() {
   }
 }
 
-main();
+module.exports = {
+  parseArgs,
+  getOutputPath
+};
+
+// Only run if directly executed
+if (require.main === module) {
+  main();
+}
