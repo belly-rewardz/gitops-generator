@@ -10,7 +10,9 @@
     "test:coverage": "jest --coverage",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "generate-static-env": "node src/app.js --service-name test-service --namespace dev --environment dev --type static --config-path ./config-test-file.yaml --output-path ./generated-files",
+    "generate-feature-env": "node src/app.js --service-name test-service --namespace feature-branch --environment dev --type dynamic --config-path ./config-test-file.yaml --output-path ./generated-files"
   },
   "dependencies": {
     "js-yaml": "^4.1.0"

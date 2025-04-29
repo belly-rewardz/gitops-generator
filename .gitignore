@@ -34,4 +34,7 @@ tmp/
 temp/
 .temp/
 
+# Generated files
+generated-files/
+
 .tool-versions

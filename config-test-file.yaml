@@ -1,0 +1,29 @@
+containerPort: 8084
+
+configData:
+  DATA_PATH: "data"
+  DB_USER: "ai_root"
+  DB_HOST: "postgresql-db"
+  DB_PORT: "5432"
+  DB_NAME: "ai_dev_db"
+  OCR_AWS_REGION_NAME: "ap-southeast-1"
+
+secretPaths: 
+  - /dev/cerra-gen-ai/SECRET
+
+migration:
+  enabled: false
+  command: ["alembic", "upgrade", "head"]
+
+resources:
+  requests:
+    memory: "128Mi"
+    cpu: "128m"
+  limits:
+    memory: "512Mi"
+    cpu: "512m"
+
+ingress:
+  ingressHost: api-private.skordev.com
+  path: "/dev/cerra-gen-ai/(.*)"
+  className: nginx-private

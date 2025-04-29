@@ -32,10 +32,7 @@ gitops-generator
 │   │   ├── values.js
 │   │   ├── defaults.js
 │   │   └── dependencies.js
-│   ├── templates/
-│   │   ├── chart.yaml
-│   │   ├── values.yaml
-│   │   └── values.default.yaml
+│   ├── __tests__/            # Application tests
 │   ├── constants.js
 │   └── app.js
 ├── .eslintrc.js              # ESLint configuration
@@ -87,25 +84,36 @@ Currently supports automatic configuration for:
 ## Examples
 
 ```bash
-# Generate with default config path
-node src/app.js --service-name cerra-gen-ai --namespace dev --environment prod --type static
+# Generate static environment files
+npm run generate-static-env
 
-# Generate with custom config path
-node src/app.js --service-name auto-approver --namespace testing --environment dev --type dynamic --config-path ./configs/dev.yaml
+# Generate feature branch environment files
+npm run generate-feature-env
 
-# Generate in current directory
-node src/app.js --service-name cerra-gen-ai --namespace dev --environment prod --type static
-
-# Generate in specific directory
+# Generate with custom parameters
 node src/app.js \
-  --service-name auto-approver \
-  --namespace testing \
-  --environment dev \
-  --type dynamic \
-  --output-path /path/to/gitops/repo
+  --service-name custom-service \
+  --namespace custom-ns \
+  --environment prod \
+  --type static \
+  --config-path ./configs/prod.yaml \
+  --output-path ./custom-output
 ```
 
 ## Development
+
+### Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Generate example files
+npm run generate-static-env
+
+# Check generated files in ./generated-files directory
+ls -la ./generated-files
+```
 
 ### Setup
 
